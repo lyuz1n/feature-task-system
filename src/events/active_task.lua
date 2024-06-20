@@ -9,6 +9,7 @@ local Functions = require('tasks/src/core/functions')
 local Texts = require('tasks/src/core/texts')
 local Errors = require('tasks/src/core/errors')
 local RepeatIntervalCacheHandler = require('tasks/src/cache/repeat_interval')
+local TasksCacheHandler = require('tasks/src/cache/tasks')
 local PlayerTask = require('tasks/src/modules/player_task')
 local Task = require('tasks/src/modules/task')
 local Constants = require('tasks/src/core/constants')
@@ -24,7 +25,7 @@ function action.onUse(player, item)
 		return true
 	end
 
-	local playerTask = PlayerTask(player):get()
+	local playerTask = TasksCacheHandler:getPlayerTask(player)
 	if playerTask then
 		local status = playerTask:getStatus()
 		local task = playerTask:getTask()
@@ -50,7 +51,8 @@ function action.onUse(player, item)
 		return true
 	end
 
-	local playerTask = PlayerTask(player):load {
+	local playerTask = PlayerTask(player)
+	playerTask:load {
 		id = uuid(),
 		task = task,
 		kills = 0,

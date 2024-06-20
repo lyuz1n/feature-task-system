@@ -22,7 +22,9 @@ function creatureEvent.onLogin(player)
 		return true
 	end
 
-	local playerTask = PlayerTask(player):load(data)
+	local playerTask = PlayerTask(player)
+	playerTask:load(data)
+
 	local task = playerTask:getTask()
 	local status = playerTask:getStatus()
 
@@ -42,7 +44,7 @@ creatureEvent = CreatureEvent(Constants.CREATUREEVENT_LOGOUT)
 function creatureEvent.onLogout(player)
 	RepeatIntervalCacheHandler:clear(player)
 
-	local playerTask = PlayerTask(player):get()
+	local playerTask = TasksCacheHandler:getPlayerTask(player)
 	if not playerTask then
 		return true
 	end

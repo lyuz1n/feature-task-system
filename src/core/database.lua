@@ -22,16 +22,16 @@ function Database:startup()
 	db.query('DELETE FROM feature_tasks_rewards')
 	db.query('DELETE FROM feature_tasks')
 
-	for uniqueId, task in pairs(Config.tasks) do
-		task.id = uniqueId
+	for uniqueId, data in pairs(Config.tasks) do
+		data.id = uniqueId
 
 		db.query(('INSERT INTO feature_tasks (id, name, kills) VALUES (%d, %s, %d)'):format(
 			uniqueId,
-			db.escapeString(task.name),
-			task.kills
+			db.escapeString(data.name),
+			data.kills
 		))
 
-		for _, reward in ipairs(task.rewards) do
+		for _, reward in ipairs(data.rewards) do
 			db.query(('INSERT INTO feature_tasks_rewards (task_id, id, count, receive_only_once) VALUES (%d, %d, %d, %d)'):format(
 				uniqueId,
 				reward.id,
@@ -40,14 +40,14 @@ function Database:startup()
 			))
 		end
 
-		for _, monster in ipairs(task.monsters) do
+		for _, monster in ipairs(data.monsters) do
 			db.query(('INSERT INTO feature_tasks_monsters (task_id, name) VALUES (%d, %s)'):format(
 				uniqueId,
 				db.escapeString(monster)
 			))
 		end
 
-		Task(uniqueId):fromData(task)
+		Task(uniqueId):load(data)
 	end
 end
 

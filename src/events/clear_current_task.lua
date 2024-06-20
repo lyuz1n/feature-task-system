@@ -6,6 +6,7 @@
 
 local RepeatIntervalCacheHandler = require('tasks/src/cache/repeat_interval')
 local Functions = require('tasks/src/core/functions')
+local TasksCacheHandler = require('tasks/src/cache/tasks')
 local Texts = require('tasks/src/core/texts')
 local Errors = require('tasks/src/core/errors')
 local Constants = require('tasks/src/core/constants')
@@ -22,7 +23,7 @@ function talkAction.onSay(player, words, param)
 		return false
 	end
 
-	local playerTask = PlayerTask(player):get()
+	local playerTask = TasksCacheHandler:getPlayerTask(player)
 	if not playerTask then
 		player:sendCancel(Errors.noTaskInProgress)
 		return false

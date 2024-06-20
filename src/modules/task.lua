@@ -16,7 +16,7 @@ function Task:getCanRepeatIn() return self.canRepeatIn end
 function Task:getMonsters() return self.monsters end
 function Task:getRewards() return self.rewards end
 
-function Task:fromData(data)
+function Task:load(data)
 	self.id = data.id
 	self.name = data.name
 	self.kills = data.kills
