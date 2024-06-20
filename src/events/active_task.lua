@@ -50,8 +50,7 @@ function action.onUse(player, item)
 		return true
 	end
 
-	local playerTask = PlayerTask(player)
-	playerTask:load {
+	local playerTask = PlayerTask(player):load {
 		id = uuid(),
 		task = task,
 		kills = 0,

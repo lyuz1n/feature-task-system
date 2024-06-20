@@ -22,9 +22,7 @@ function creatureEvent.onLogin(player)
 		return true
 	end
 
-	local playerTask = PlayerTask(player)
-	playerTask:load(data)
-
+	local playerTask = PlayerTask(player):load(data)
 	local task = playerTask:getTask()
 	local status = playerTask:getStatus()
 
