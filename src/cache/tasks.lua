@@ -28,12 +28,8 @@ function TasksCacheHandler:unregisterPlayerTask(playerGuid)
 	playerTasks[playerGuid] = nil
 end
 
-function TasksCacheHandler:getPlayerTask(player)
-	return playerTasks[player:getGuid()]
-end
-
-function TasksCacheHandler:getPlayerTasks()
-	return playerTasks
+function TasksCacheHandler:getPlayerTask(playerGuid)
+	return playerTasks[playerGuid]
 end
 
 return TasksCacheHandler

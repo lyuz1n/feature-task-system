@@ -4,7 +4,6 @@
 	Discord: lyu07
 ]]
 
-local TasksCacheHandler = require('tasks/src/cache/tasks')
 local Texts = require('tasks/src/core/texts')
 local Constants = require('tasks/src/core/constants')
 local Database = require('tasks/src/core/database')
@@ -25,7 +24,7 @@ function creatureEvent.onKill(player, target)
 		return true
 	end
 	
-	local playerTask = TasksCacheHandler:getPlayerTask(player)
+	local playerTask = PlayerTask(player):get()
 	if not playerTask then
 		return true
 	end

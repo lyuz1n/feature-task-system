@@ -44,7 +44,7 @@ creatureEvent = CreatureEvent(Constants.CREATUREEVENT_LOGOUT)
 function creatureEvent.onLogout(player)
 	RepeatIntervalCacheHandler:clear(player)
 
-	local playerTask = TasksCacheHandler:getPlayerTask(player)
+	local playerTask = PlayerTask(player):get()
 	if not playerTask then
 		return true
 	end

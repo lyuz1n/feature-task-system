@@ -6,7 +6,6 @@
 
 local Config = require('tasks/config')
 local RepeatIntervalCacheHandler = require('tasks/src/cache/repeat_interval')
-local TasksCacheHandler = require('tasks/src/cache/tasks')
 local Functions = require('tasks/src/core/functions')
 local Texts = require('tasks/src/core/texts')
 local Errors = require('tasks/src/core/errors')
@@ -16,7 +15,7 @@ local DatabaseStatus = Database.status
 
 local action = Action()
 function action.onUse(player)
-	local playerTask = TasksCacheHandler:getPlayerTask(player)
+	local playerTask = PlayerTask(player):get()
 	if not playerTask then
 		player:sendCancel(Errors.noTaskInProgress)
 		return true
@@ -67,7 +66,7 @@ local magicEffects = {
 
 function globalEvent.onThink()
 	for _, player in ipairs(Game.getSpectators(position, false, true)) do
-		local playerTask = TasksCacheHandler:getPlayerTask(player)
+		local playerTask = PlayerTask(player):get()
 		if playerTask and playerTask:getStatus() == DatabaseStatus.PENDING_REWARD then
 			for _, effect in ipairs(magicEffects) do
 				position:sendMagicEffect(effect, player)
