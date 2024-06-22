@@ -4,8 +4,6 @@
 	Discord: lyu07
 ]]
 
-local RepeatIntervalCacheHandler = require('tasks/src/cache/repeat_interval')
-local Functions = require('tasks/src/core/functions')
 local TasksCacheHandler = require('tasks/src/cache/tasks')
 local Texts = require('tasks/src/core/texts')
 local Errors = require('tasks/src/core/errors')

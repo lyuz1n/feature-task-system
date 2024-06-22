@@ -26,7 +26,7 @@ function Functions:getRewardsDescription(task, firstCompletion)
 	local taskRewards = task:getRewards()
 
 	for index, reward in ipairs(taskRewards) do
-		local canAdd = true
+		local canInsert = true
 		if reward.first and not firstCompletion then
 			canInsert = false
 		end
@@ -49,7 +49,7 @@ function Functions:sendRewardsToInbox(player, task, firstCompletion)
 		player:sendCancel(Errors.defaultError)
 		return
 	end
-	
+
 	for _, reward in ipairs(task:getRewards()) do
 		local skipAdd = reward.first and not firstCompletion
 		if not skipAdd then
