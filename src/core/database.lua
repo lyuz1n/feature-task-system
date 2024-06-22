@@ -118,11 +118,12 @@ function Database:isTaskFirstCompletion(taskId, playerGuid)
 end
 
 function Database:getPlayerLastTaskCompletionTime(taskId, playerGuid)
-	local resultId = db.storeQuery(('SELECT UNIX_TIMESTAMP(updated_at) AS timestamp FROM feature_tasks_history WHERE player_id = %d AND task_id = %d AND status = %s ORDER BY updated_at DESC LIMIT 1'):format(
-		playerGuid,
-		taskId,
-		db.escapeString(self.status.COMPLETED)
-	))
+	local resultId = db.storeQuery(('SELECT UNIX_TIMESTAMP(updated_at) AS timestamp FROM feature_tasks_history WHERE player_id = %d AND task_id = %d AND status = %s ORDER BY updated_at DESC LIMIT 1')
+		:format(
+			playerGuid,
+			taskId,
+			db.escapeString(self.status.COMPLETED)
+		))
 
 	if resultId then
 		local timestamp = result.getNumber(resultId, 'timestamp')

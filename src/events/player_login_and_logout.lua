@@ -48,7 +48,7 @@ function creatureEvent.onLogout(player)
 	if not playerTask then
 		return true
 	end
-	
+
 	Database:savePlayerInProgressTask(playerTask)
 	playerTask:delete()
 	return true

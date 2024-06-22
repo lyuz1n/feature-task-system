@@ -10,10 +10,15 @@ local PlayerTask = {}
 PlayerTask.__index = PlayerTask
 
 function PlayerTask:getTask() return self.task end
+
 function PlayerTask:getPlayerGuid() return self.playerGuid end
+
 function PlayerTask:getId() return self.id end
+
 function PlayerTask:getKills() return self.kills end
+
 function PlayerTask:getStatus() return self.status end
+
 function PlayerTask:setStatus(status) self.status = status end
 
 function PlayerTask:load(data)
@@ -29,7 +34,7 @@ function PlayerTask:delete()
 end
 
 return function(player)
-	local object = {playerGuid = player:getGuid()}
+	local object = { playerGuid = player:getGuid() }
 
 	setmetatable(object, PlayerTask)
 	return object

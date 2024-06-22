@@ -24,7 +24,7 @@ function creatureEvent.onKill(player, target)
 	if not target:isMonster() then
 		return true
 	end
-	
+
 	local playerTask = TasksCacheHandler:getPlayerTask(player)
 	if not playerTask then
 		return true
@@ -41,7 +41,7 @@ function creatureEvent.onKill(player, target)
 		currentkills = playerTask:getKills(),
 		kills = task:getKills()
 	})
-	
+
 	if playerTask:getKills() < task:getKills() then
 		return true
 	end

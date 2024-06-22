@@ -28,16 +28,16 @@ function action.onUse(player, item)
 	local playerTask = TasksCacheHandler:getPlayerTask(player)
 	if playerTask then
 		local status = playerTask:getStatus()
-		local task = playerTask:getTask()
+		local currentTask = playerTask:getTask()
 
 		if status == DatabaseStatus.IN_PROGRESS then
 			player:sendCancel(Errors.cancelBeforeStart:placeholder {
-				name = task:getName(),
+				name = currentTask:getName(),
 				command = Constants.TAKACTION_WORDS
 			})
 		elseif status == DatabaseStatus.PENDING_REWARD then
 			player:sendCancel(Errors.receiveRewardBeforeStart:placeholder {
-				name = task:getName()
+				name = currentTask:getName()
 			})
 		end
 		return true
@@ -46,12 +46,12 @@ function action.onUse(player, item)
 	local seconds = RepeatIntervalCacheHandler:getSecondsRemaining(player:getGuid(), task:getId())
 	if seconds > 0 then
 		player:sendCancel(Errors.canRepeatTaskIn:placeholder {
-			duration = Duration {seconds = seconds}:string(Constants.DURATION_LANGUAGE)
+			duration = Duration { seconds = seconds }:string(Constants.DURATION_LANGUAGE)
 		})
 		return true
 	end
 
-	local playerTask = PlayerTask(player)
+	playerTask = PlayerTask(player)
 	playerTask:load {
 		id = uuid(),
 		task = task,

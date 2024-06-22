@@ -10,10 +10,15 @@ local Task = {}
 Task.__index = Task
 
 function Task:getId() return self.id end
+
 function Task:getName() return self.name end
+
 function Task:getKills() return self.kills end
+
 function Task:getCanRepeatIn() return self.canRepeatIn end
+
 function Task:getMonsters() return self.monsters end
+
 function Task:getRewards() return self.rewards end
 
 function Task:load(data)
@@ -35,7 +40,7 @@ return function(uniqueId)
 		return task
 	end
 
-	local object = {id = uniqueId}
+	local object = { id = uniqueId }
 	setmetatable(object, Task)
 
 	TasksCacheHandler:registerTask(uniqueId, object)
